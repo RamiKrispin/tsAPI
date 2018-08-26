@@ -17,3 +17,14 @@ A list, with the series metadata
 \description{
 A function to pull the available categories in the eia API
 }
+\examples{
+\dontrun{
+# Set you eia API key
+api_key <- "Set you API key"
+
+# Querying the eia API to get possible categories
+eia_query(api_key = api_key) # getting the full list of categories
+eia_query(api_key = api_key, category_id = "0") # querying the Electricity category
+childseries <- eia_query(api_key = api_key, category_id = "1") # querying the Electricity Net Generation child series
+}
+}
