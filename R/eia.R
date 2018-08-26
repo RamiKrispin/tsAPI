@@ -4,7 +4,16 @@
 #' @param api_key A character, the user API key for the eia website
 #' @param category_id A character, the category ID as defined in the eia API
 #' @return A list, with the series metadata
-
+#' @example
+#' \dontrun{
+#' # Set you eia API key
+#' api_key <- "Set you API key"
+#'
+#' # Querying the eia API to get possible categories
+#' eia_query(api_key = api_key) # getting the full list of categories
+#' eia_query(api_key = api_key, category_id = "0") # querying the Electricity category
+#' childseries <- eia_query(api_key = api_key, category_id = "1") # querying the Electricity Net Generation child series
+#'}
 
 eia_query <- function(api_key, category_id = NULL){
   url <- get <- output <- NULL
@@ -25,7 +34,20 @@ eia_query <- function(api_key, category_id = NULL){
 #' @param series_id A character, the series ID as defined in the eia API,
 #' to query for the available series IDs use the eia_query function
 #' @return A list, with the series metadata
-
+#' @example
+#' \dontrun{
+#' # Set you eia API key
+#' api_key <- "Set you API key"
+#'
+#' # Querying the eia API to get possible categories
+#' eia_query(api_key = api_key) # getting the full list of categories
+#' eia_query(api_key = api_key, category_id = "0") # querying the Electricity category
+#' childseries <- eia_query(api_key = api_key, category_id = "1") # querying the Electricity Net Generation child series
+#' series_id <- childseries$category$childseries$series_id[1] # pulling the first series ID from the list of Net Generation series
+#'
+#' # Pulling the series from the eia API
+#' raw_series <- eia_series(api_key = api_key, series_id = series_id)
+#'}
 eia_series <- function(api_key, series_id){
   url <- get <- output <- NULL
   url <- paste("http://api.eia.gov/series/?series_id=", series_id, "&api_key=", api_key, sep = "")
