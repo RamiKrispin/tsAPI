@@ -35,8 +35,6 @@ eia_series <- function(api_key, series_id){
 }
 
 
-
-
 #' Parse a EIA Output
 #' @export eia_parse
 #' @description A parsing function for series from the EIA API
@@ -44,7 +42,6 @@ eia_series <- function(api_key, series_id){
 #' @param type A character, define the class of the output, possible options c("xts", "zoo", "ts", "data.frame", "data.table", "tbl")
 #' @return A time series object according to the type argument setting
 
-class(raw_series)
 eia_parse <- function(raw_series, type = "xts"){
   date <- raw_series$series$data[[1]][,1]
   data <- raw_series$series$data[[1]][,2]
