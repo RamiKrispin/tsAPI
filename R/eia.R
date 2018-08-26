@@ -41,7 +41,26 @@ eia_series <- function(api_key, series_id){
 #' @param raw_series A list, the EIA API output for series request using the eia_series function
 #' @param type A character, define the class of the output, possible options c("xts", "zoo", "ts", "data.frame", "data.table", "tbl")
 #' @return A time series object according to the type argument setting
-
+#' @example
+#' \dontrun{
+#' # Set you eia API key
+#' api_key <- "Set you API key"
+#'
+#' # Querying the eia API to get possible categories
+#' eia_query(api_key = api_key) # getting the full list of categories
+#' eia_query(api_key = api_key, category_id = "0") # querying the Electricity category
+#' childseries <- eia_query(api_key = api_key, category_id = "1") # querying the Electricity Net Generation child series
+#' series_id <- childseries$category$childseries$series_id[1] # pulling the first series ID from the list of Net Generation series
+#'
+#' # Pulling the series from the eia API
+#' raw_series <- eia_series(api_key = api_key, series_id = series_id)
+#'
+#' # Parsing the raw output to "ts" format
+#' ts.obj <- eia_parse(raw_series = raw_series, type = "ts")
+#'
+#' # Parsing the raw output to "zoo" format
+#' zoo.obj <- eia_parse(raw_series = raw_series, type = "zoo")
+#' }
 eia_parse <- function(raw_series, type = "xts"){
 
   # Error handling
