@@ -57,7 +57,7 @@ eia_series <- function(api_key, series_id){
 }
 
 
-#' Parse a EIA Output
+#' Parse an EIA Output
 #' @export eia_parse
 #' @description A parsing function for series from the EIA API
 #' @param raw_series A list, the EIA API output for series request using the eia_series function

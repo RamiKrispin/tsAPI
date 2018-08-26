@@ -2,7 +2,7 @@
 % Please edit documentation in R/eia.R
 \name{eia_parse}
 \alias{eia_parse}
-\title{Parse a EIA Output}
+\title{Parse an EIA Output}
 \usage{
 eia_parse(raw_series, type = "xts")
 }
