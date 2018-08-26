@@ -4,7 +4,7 @@
 #' @param api_key A character, the user API key for the eia website
 #' @param category_id A character, the category ID as defined in the eia API
 #' @return A list, with the series metadata
-#' @example
+#' @examples
 #' \dontrun{
 #' # Set you eia API key
 #' api_key <- "Set you API key"
@@ -34,7 +34,7 @@ eia_query <- function(api_key, category_id = NULL){
 #' @param series_id A character, the series ID as defined in the eia API,
 #' to query for the available series IDs use the eia_query function
 #' @return A list, with the series metadata
-#' @example
+#' @examples
 #' \dontrun{
 #' # Set you eia API key
 #' api_key <- "Set you API key"
@@ -63,7 +63,7 @@ eia_series <- function(api_key, series_id){
 #' @param raw_series A list, the EIA API output for series request using the eia_series function
 #' @param type A character, define the class of the output, possible options c("xts", "zoo", "ts", "data.frame", "data.table", "tbl")
 #' @return A time series object according to the type argument setting
-#' @example
+#' @examples
 #' \dontrun{
 #' # Set you eia API key
 #' api_key <- "Set you API key"
