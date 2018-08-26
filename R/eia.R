@@ -98,7 +98,8 @@ eia_parse <- function(raw_series, type = "xts"){
   data <- raw_series$series$data[[1]][,2]
   if(type == "xts"){
     if(raw_series$series$f == "M"){
-      output <- xts::xts(x =  base::as.numeric(data), order.by =  zoo::as.yearmon(date))
+      output <- xts::xts(x =  base::as.numeric(data),
+                         order.by =  lubridate::ymd(base::paste(date, "01", sep = "")))
     } else if (raw_series$series$f == "Q"){
       output <- xts::xts(x =  base::as.numeric(data), order.by =  zoo::as.yearqtr(date))
     } else if (raw_series$series$f == "A"){
@@ -107,7 +108,7 @@ eia_parse <- function(raw_series, type = "xts"){
     }
   } else if(type == "zoo"){
     if(raw_series$series$f == "M"){
-      output <- zoo::zoo(x =  base::as.numeric(data), order.by =  zoo::as.yearmon(date))
+      output <- zoo::zoo(x =  base::as.numeric(data), order.by =  lubridate::ymd(base::paste(date, "01", sep = "")))
     } else if (raw_series$series$f == "Q"){
       output <- zoo::zoo(x =  base::as.numeric(data), order.by =  zoo::as.yearqtr(date))
     } else if (raw_series$series$f == "A"){
