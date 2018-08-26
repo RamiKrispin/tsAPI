@@ -43,7 +43,16 @@ eia_series <- function(api_key, series_id){
 #' @return A time series object according to the type argument setting
 
 eia_parse <- function(raw_series, type = "xts"){
+
+  # Error handling
+  if(!type %in% c("xts", "zoo", "ts", "data.frame", "data.table", "tbl")){
+    stop("The value of the 'type' is invalid, please one of the follow c('xts', 'zoo', 'ts', 'data.frame', 'data.table', 'tbl')")
+  }
   `%>%` <- magrittr::`%>%`
+  if(base::is.null(raw_series$series$data) ||
+     base::is.null(raw_series$series$f)){
+    stop("The input is not valid, please make sure you are using the output from 'eia_series' as input for the eia_parse function")
+  }
   date <- raw_series$series$data[[1]][,1]
   data <- raw_series$series$data[[1]][,2]
   if(type == "xts"){
