@@ -43,6 +43,7 @@ eia_series <- function(api_key, series_id){
 #' @return A time series object according to the type argument setting
 
 eia_parse <- function(raw_series, type = "xts"){
+  `%>%` <- magrittr::`%>%`
   date <- raw_series$series$data[[1]][,1]
   data <- raw_series$series$data[[1]][,2]
   if(type == "xts"){
