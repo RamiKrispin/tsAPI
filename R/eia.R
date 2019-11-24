@@ -27,6 +27,41 @@ eia_query <- function(api_key, category_id = NULL){
   return(output)
 }
 
+
+#' EIA API Category Query
+#' @export eia_query
+#' @description A function to pull the available categories in the eia API
+#' @param api_key A character, the user API key for the eia website
+#' @param category_id A character, the category ID as defined in the eia API
+#' @return A list, with the series metadata
+#' @examples
+#' \dontrun{
+#' # Set you eia API key
+#' api_key <- "Set you API key"
+#'
+#' # Querying the eia API to get possible categories
+#' eia_category(api_key = api_key) # getting the full list of categories
+#' eia_category(api_key = api_key, category_id = "0") # querying the Electricity category
+#'}
+
+eia_category <- function(api_key, category_id){
+  `%>%` <- magrittr::`%>%`
+
+  url <- base::paste("http://api.eia.gov/category/?",
+                     "api_key=", api_key,
+                     "&category_id=", category_id,
+                     "&out=json", sep = "")
+
+
+
+
+  command <- base::paste("curl", " '",url, "' | ",  "jq -r '.category | .childcategories[] | [.name , .category_id] | @tsv'", sep = "")
+
+  output <- base::read.table(text = system(command = command, intern = TRUE), sep = "\t") %>%
+    stats::setNames(c("category", "category_id"))
+  return(output)
+}
+
 #' EIA API Series Query
 #' @export eia_series
 #' @description A function to pull a series from the eia API based on series ID
