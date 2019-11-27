@@ -57,7 +57,7 @@ eia_category <- function(api_key, category_id){
 
   command <- base::paste("curl", " '",url, "' | ",  "jq -r '.category | .childcategories[] | [.name , .category_id] | @tsv'", sep = "")
 
-  output <- base::read.table(text = system(command = command, intern = TRUE), sep = "\t") %>%
+  output <- utils::read.table(text = system(command = command, intern = TRUE), sep = "\t") %>%
     stats::setNames(c("category", "category_id"))
   return(output)
 }
